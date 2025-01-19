@@ -5,6 +5,17 @@ aws_access_key_id = st.secrets["AWS"]["AWS_ACCESS_KEY_ID"]
 aws_secret_access_key = st.secrets["AWS"]["AWS_SECRET_ACCESS_KEY"]
 aws_region = st.secrets["AWS"]["AWS_DEFAULT_REGION"]
 
+from github import Github
+
+# Authenticate using GitHub token
+github_token = st.secrets["github"]["GITHUB_TOKEN"]
+g = Github(github_token)
+
+# Access a private repository
+repo = g.get_repo("mithra14/weatherbot")
+print(repo.name)
+
+
 # AWS configuration
 region_name = "us-east-1"  # e.g., us-east-1
 bot_id = "NYOBDOCRE7"

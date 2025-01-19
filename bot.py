@@ -1,11 +1,12 @@
 import streamlit as st
 import boto3
+from github import Github
 
 aws_access_key_id = st.secrets["AWS"]["AWS_ACCESS_KEY_ID"]
 aws_secret_access_key = st.secrets["AWS"]["AWS_SECRET_ACCESS_KEY"]
 aws_region = st.secrets["AWS"]["AWS_DEFAULT_REGION"]
 
-from github import Github
+
 
 # Authenticate using GitHub token
 github_token = st.secrets["github"]["GITHUB_TOKEN"]
@@ -63,7 +64,7 @@ if st.button("Send"):
         except Exception as e:
             st.error(f"Error: {str(e)}")
     else:
-        st.warning("Please enter a message!")
+        st.warning("Please enter your messagesss!")
 
 # Display chat history
 for chat in st.session_state.chat_history:

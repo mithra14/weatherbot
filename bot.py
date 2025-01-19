@@ -1,6 +1,10 @@
 import streamlit as st
 import boto3
 
+aws_access_key_id = st.secrets["AWS"]["AWS_ACCESS_KEY_ID"]
+aws_secret_access_key = st.secrets["AWS"]["AWS_SECRET_ACCESS_KEY"]
+aws_region = st.secrets["AWS"]["AWS_DEFAULT_REGION"]
+
 # AWS configuration
 region_name = "us-east-1"  # e.g., us-east-1
 bot_id = "NYOBDOCRE7"
@@ -9,7 +13,9 @@ locale_id = "en_US"  # Replace with your locale
 session_id = "01"  # Replace with a unique session ID for each user
 
 # Initialize Lex Runtime V2 client
-client = boto3.client('lexv2-runtime', region_name=region_name)
+client = boto3.client('lexv2-runtime', aws_access_key_id=aws_access_key_id,
+    aws_secret_access_key=aws_secret_access_key,
+    region_name=aws_region)
 
 # Streamlit app layout
 st.title("Chat with Weather Bot")

@@ -30,8 +30,8 @@ client = boto3.client('lexv2-runtime', aws_access_key_id=aws_access_key_id,
     region_name=aws_region)
 
 # Streamlit app layout
-st.title("Chat with Weather Bot")
-st.write("Ask me about the weather in any city!")
+st.title("Chat with Weather Bot..holaaaaaaaaaaaaaaaaaaaaaa")
+st.write("Ask me about the weather in any city!I am happy to provide answer")
 
 # Text input for user messages
 user_message = st.text_input("Your Message:")

@@ -28,7 +28,7 @@ client = boto3.client(
     region_name=aws_region,
 )
 
-# New background image URL (choose one from above)
+# New background image URL
 background_image_url = "https://weatherpredict22012025.s3.us-east-1.amazonaws.com/images.jpg"
 
 st.markdown(
@@ -42,7 +42,7 @@ st.markdown(
         color: #333;
     }}
     .stApp {{
-        background-color: rgba(255, 255, 255, 0.9);  /* Slight overlay for professionalism */
+        background-color: rgba(255, 255, 255, 0.9);
         border-radius: 10px;
         padding: 30px;
     }}
@@ -64,7 +64,7 @@ st.markdown(
     .chat-bubble img {{
         margin-right: 10px;
         border-radius: 50%;
-        width: 40px;  /* Simplified size */
+        width: 40px;
     }}
     .user-message {{
         background-color: #f0f0f0;
@@ -96,11 +96,14 @@ user_message = st.text_input("Your Message:", placeholder="Ask me about the weat
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 
-# Send message to Lex and display the response
+# Clear session history on new message
 if st.button("Send"):
     if user_message.strip():
         with st.spinner("Processing..."):
             try:
+                # Clear previous session history to avoid multiple results
+                st.session_state.chat_history = []
+                
                 # Call Lex Runtime V2
                 response = client.recognize_text(
                     botId=bot_id,
@@ -111,7 +114,7 @@ if st.button("Send"):
                 )
                 lex_message = response["messages"][0]["content"]
                 
-                # Append chat history
+                # Append new messages to the chat history
                 st.session_state.chat_history.append({"sender": "You", "message": user_message})
                 st.session_state.chat_history.append({"sender": "Bot", "message": lex_message})
             except Exception as e:
